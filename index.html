@@ -1,12 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sahil Amin - Cloud Engineer</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sahil Amin | Senior Cloud Support Engineer</title>
+  <style>
+    body {
+      background-color: #050505;
+      color: #e2e8f0;
+      font-family: monospace;
+      margin: 0;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .container {
+      max-w: 850px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    header {
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.1);
+      text-align: center;
+      position: relative;
+    }
+    .profile-frame {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 20px auto;
+      border-radius: 50%;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+      overflow: hidden;
+      background-color: #0f172a;
+    }
+    .profile-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    h1 {
+      color: #10b981;
+      font-size: 3rem;
+      margin: 0 0 5px 0;
+      letter-spacing: 1px;
+    }
+    .subtitle {
+      color: #c084fc;
+      font-size: 0.9rem;
+      margin: 0 0 20px 0;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-weight: 600;
+    }
+    h2 {
+      color: #10b981;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      margin: 0 0 15px 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      border: 1px solid #1e293b;
+      background-color: rgba(0,0,0,0.7);
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .card h3 {
+      color: #34d399;
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+    }
+    .card h3 span {
+      color: #c084fc;
+    }
+    .log-container {
+      border: 1px solid #1e293b;
+      background-color: rgba(0,0,0,0.6);
+      border-radius: 12px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .job-entry {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .tag {
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      background-color: rgba(16,185,129,0.15);
+      color: #10b981;
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 4px;
+    }
+    .job-title {
+      color: #c084fc;
+      margin: 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    p {
+      color: #9ca3af;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="matrix"></canvas>
+
+  <div class="container">
+    <header>
+      <div class="profile-frame">
+        <img src="cutout.png" alt="Sahil Amin">
+      </div>
+      <h1>SAHIL AMIN</h1>
+      <div class="subtitle">Senior Cloud Support Engineer</div>
+      <p>3 years of architecture experience engineering resilient cloud infrastructure, secure networking pipelines, data integrity, and high-availability enterprise frameworks.</p>
+    </header>
+
+    <section>
+      <h2>&gt; SYSTEM_ARSENAL</h2>
+      <div class="grid">
+        <div class="card">
+          <h3><span>01//</span> Cloud & Infra</h3>
+          <p>AWS VPC, EC2, S3, ELB, RDS, DynamoDB, Route53</p>
+        </div>
+        <div class="card">
+          <h3><span>02//</span> Security & Networks</h3>
+          <p>Netskope SASE, DLP, Secure Web Gateway, SSL/TLS, IPsec, Azure AD, SAML, TCP/IP, DNS, DHCP, SSH, Load Balancing, Citrix Gateway</p>
+        </div>
+        <div class="card">
+          <h3><span>03//</span> Diagnostics</h3>
+          <p>Wireshark, TCP Dumps, Packet Analysis, Log Parsing | Java, REST APIs, Python, MySQL</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>&gt; CAREER_DEPLOYMENT_LOG</h2>
+      <div class="log-container">
+        <div class="job-entry">
+          <div class="job-header">
+            <h3 style="color: #34d399; margin:0;">Netskope</h3>
+            <span class="tag">Nov 2024 - Present</span>
+          </div>
+          <p class="job-title">Senior Cloud Support Engineer</p>
+          <p>Handling and solving high-severity security architecture logs for Enterprise Clients on Netskope cloud routing, NPA, Explicit Proxy implementations, and structural DLP policies.</p>
+        </div>
+
+        <div class="job-entry" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+          <div class="job-header">
+            <h3 style="color: #34d399; margin:0;">Citrix</h3>
+            <span class="tag" style="background-color:#1e293b; color:#9ca3af; border:none;">Mar 2024 - Nov 2024</span>
+          </div>
+          <p class="job-title">Citrix Cloud Support Engineer</p>
+          <p>Delivered critical tier support infrastructures for Citrix ADC (NetScaler networks), advanced Gateway access points, and virtualization matrixes. Resolved complex load balancing and SSL decryption incidents.</p>
+        </div>
+
+        <div class="job-entry" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+          <div class="job-header">
+            <h3 style="color: #34d399; margin:0;">Josh Software Pvt. Ltd.</h3>
+            <span class="tag" style="background-color:#1e293b; color:#9ca3af; border:none;">June 2022 - Oct 2023</span>
+          </div>
+          <p class="job-title">Cloud Software Engineer</p>
+          <p>Engineered backend application systems and cloud environments utilizing Java, Spring Boot paradigms, and AWS service pipelines. Executed complete data migrations between Azure environments and AWS architecture clusters.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer style="text-align: center; font-size: 11px; color: #475569; padding-top: 10px;">
+      SYSTEM_STATUS: ONLINE // AUTH_USER: SAHIL_AMIN_
+    </footer>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const alphabet = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const rainDrops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(5, 5, 5, 0.06)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.4)';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < rainDrops.length; i++) {
+        const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+        const x = i * fontSize;
+        const y = rainDrops[i] * fontSize;
+
+        if (Math.random() > 0.98) ctx.fillStyle = '#ffffff';
+        else ctx.fillStyle = 'rgba(16, 185, 129, 0.4)';
+
+        ctx.fillText(text, x, y);
+        if (y > canvas.height && Math.random() > 0.975) rainDrops[i] = 0;
+        rainDrops[i]++;
+      }
+    }
+    setInterval(draw, 33);
+  </script>
+</body>
 </html>
