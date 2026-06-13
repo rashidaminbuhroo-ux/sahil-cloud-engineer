@@ -3,358 +3,207 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sahil Amin | Senior Cloud Support Engineer</title>
+  <title>Sahil Amin | Cloud Architect</title>
   <style>
-    /* --- SYSTEM BASICS & THEME COLOR VARIATION --- */
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap');
+    /* --- FONTS & BASICS --- */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap');
 
-    body {
-      background-color: #030303;
-      color: #e2e8f0;
-      font-family: 'Fira Code', monospace;
+    body, html {
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
-    canvas {
+    /* --- CINEMATIC BACKGROUND VIDEO --- */
+    .bg-video {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1;
-      opacity: 0.25;
-      pointer-events: none;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 0.5;
     }
 
-    /* --- TERMINAL BOOT SEQUENCE LOADER --- */
-    #boot-screen {
+    /* Dark gradient overlay to make text pop */
+    .overlay {
       position: fixed;
       inset: 0;
-      background-color: #050505;
-      z-index: 9999;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 100%);
+      z-index: -1;
+    }
+
+    /* --- SCROLL SECTIONS --- */
+    section {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: flex-start;
-      padding: 10% 15%;
+      padding: 5% 10%;
       box-sizing: border-box;
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .boot-line {
-      color: #10b981;
-      font-size: 1.1rem;
-      margin-bottom: 8px;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typeLine 0.4s steps(40, end) forwards;
-    }
-
-    .boot-ok { color: #34d399; font-weight: bold; }
-    .boot-purple { color: #c084fc; }
-
-    /* --- PORTFOLIO SYSTEM LAYOUT --- */
-    .container {
-      max-width: 900px;
+      max-width: 1400px;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* --- CINEMATIC REVEAL ANIMATIONS --- */
-    @keyframes typeLine { to { width: 100%; } }
-    
-    @keyframes techFlicker {
-      0% { opacity: 0.9; }
-      50% { opacity: 1; }
-      100% { opacity: 0.95; }
-    }
-
-    /* --- INTERACTIVE GLOW INTERFACES --- */
-    header {
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      background: linear-gradient(135deg, rgba(10, 15, 12, 0.9) 0%, rgba(3, 3, 3, 0.95) 100%);
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 0 40px rgba(16, 185, 129, 0.05), inset 0 0 20px rgba(16, 185, 129, 0.05);
-      text-align: center;
-      position: relative;
-      animation: techFlicker 4s infinite alternate;
-    }
-
-    .profile-frame {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 24px auto;
-      border-radius: 50%;
-      border: 2px solid #10b981;
-      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
-      overflow: hidden;
-      background-color: #0f172a;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .profile-frame:hover {
-      transform: scale(1.08) rotate(3deg);
-    }
-
-    .profile-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
+    /* --- TYPOGRAPHY (Matching the Reel) --- */
     h1 {
-      color: #ffffff;
-      font-size: 3rem;
-      margin: 0 0 8px 0;
-      letter-spacing: 2px;
-      font-weight: 700;
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-    }
-
-    .subtitle {
-      color: #10b981;
-      font-size: 0.95rem;
-      margin: 0 0 24px 0;
-      text-transform: uppercase;
-      letter-spacing: 5px;
-      font-weight: 600;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin: 0 0 20px 0;
+      letter-spacing: -0.03em;
     }
 
     h2 {
-      color: #10b981;
-      font-size: 1.3rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin: 0 0 20px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      margin: 0 0 40px 0;
+      letter-spacing: -0.02em;
     }
 
+    p.lead {
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+      font-weight: 600;
+      line-height: 1.4;
+      max-width: 800px;
+      color: #d1d5db;
+    }
+
+    .red-text {
+      color: #ef4444; /* Aggressive cinematic red */
+    }
+
+    /* --- SCROLL ANIMATION CLASSES --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- DATA GRIDS --- */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
     }
 
-    /* --- GLOWING HOVER CARDS --- */
-    .card {
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background-color: rgba(10, 10, 10, 0.75);
-      padding: 25px;
-      border-radius: 12px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    .grid-item {
+      border-top: 2px solid #333;
+      padding-top: 20px;
     }
 
-    .card:hover {
-      border-color: rgba(16, 185, 129, 0.5);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.08);
+    .grid-item h3 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin: 0 0 10px 0;
     }
 
-    .card h3 {
-      color: #ffffff;
-      margin: 0 0 12px 0;
-      font-size: 1.05rem;
-      letter-spacing: 1px;
-    }
-
-    .card h3 span {
-      color: #c084fc;
-      margin-right: 6px;
-    }
-
-    .log-container {
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background-color: rgba(8, 8, 8, 0.7);
-      border-radius: 14px;
-      padding: 35px;
-      display: flex;
-      flex-direction: column;
-      gap: 35px;
-    }
-
-    .job-entry {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      position: relative;
-    }
-
-    .job-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .tag {
-      padding: 3px 10px;
-      font-size: 0.75rem;
-      background-color: rgba(16, 185, 129, 0.1);
-      color: #10b981;
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      border-radius: 6px;
-    }
-
-    .job-title {
-      color: #c084fc;
-      margin: 0;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    p {
+    .grid-item p {
       color: #9ca3af;
-      font-size: 0.95rem;
-      line-height: 1.65;
+      font-size: 1.1rem;
+      line-height: 1.6;
       margin: 0;
     }
+
+    /* Delay animations for grid items */
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
   </style>
 </head>
 <body>
 
-  <div id="boot-screen">
-    <div class="boot-line" style="animation-delay: 0.1s;">&gt; SHIELD_KERNEL_INIT ... <span class="boot-ok">[ SUCCESS ]</span></div>
-    <div class="boot-line" style="animation-delay: 0.4s;">&gt; ESTABLISHING NEURAL CLOUD ROUTING ... <span class="boot-ok">[ ONLINE ]</span></div>
-    <div class="boot-line" style="animation-delay: 0.7s;">&gt; ALIGNING SECURITY ASSETS (NETSKOPE/AWS) ... <span class="boot-ok">[ SECURE ]</span></div>
-    <div class="boot-line" style="animation-delay: 1.0s;">&gt; MOUNTING PROFILE: <span class="boot-purple">SAHIL_AMIN_V3.9</span> ...</div>
-  </div>
+  <video class="bg-video" autoplay loop muted playsinline>
+    <source src="https://assets.codepen.io/3364143/7btrrd.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
 
-  <canvas id="matrix"></canvas>
+  <section id="hero">
+    <div class="reveal">
+      <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 600; color: #ef4444; margin-bottom: 10px;">Sahil Amin</p>
+      <h1>I build cloud architecture <br><span class="red-text">that scales.</span></h1>
+      <p class="lead">Senior Cloud Support Engineer hitting the latency targets, securing enterprise pipelines, and operating on the bleeding edge of <span style="color: #fff;">what's possible.</span></p>
+    </div>
+  </section>
 
-  <div class="container" id="main-content">
-    <header>
-      <div class="profile-frame">
-        <img src="cutout.png" alt="Sahil Amin">
+  <section id="stack">
+    <div class="reveal">
+      <h2>The stack, <span class="red-text">spoken aloud.</span></h2>
+    </div>
+    <div class="grid">
+      <div class="grid-item reveal delay-1">
+        <h3>Cloud & Infra</h3>
+        <p>AWS VPC, EC2, S3, ELB, RDS, DynamoDB, Route53. Architecting the fastest path from concept to production.</p>
       </div>
-      <h1>SAHIL AMIN</h1>
-      <div class="subtitle">Senior Cloud Support Engineer</div>
-      <p style="max-width: 700px; margin: 0 auto;">3 years of architecture experience engineering resilient cloud infrastructure, secure networking pipelines, data integrity, and high-availability enterprise frameworks.</p>
-    </header>
-
-    <section>
-      <h2>&gt; SYSTEM_ARSENAL</h2>
-      <div class="grid">
-        <div class="card">
-          <h3><span>01//</span> Cloud & Infra</h3>
-          <p>AWS VPC, EC2, S3, ELB, RDS, DynamoDB, Route53</p>
-        </div>
-        <div class="card">
-          <h3><span>02//</span> Security & Networks</h3>
-          <p>Netskope SASE, DLP, Secure Web Gateway, SSL/TLS, IPsec, Azure AD, SAML, TCP/IP, DNS, DHCP, SSH, Load Balancing, Citrix Gateway</p>
-        </div>
-        <div class="card">
-          <h3><span>03//</span> Diagnostics</h3>
-          <p>Wireshark, TCP Dumps, Packet Analysis, Log Parsing | Java, REST APIs, Python, MySQL</p>
-        </div>
+      <div class="grid-item reveal delay-2">
+        <h3>Security & Networks</h3>
+        <p>Netskope SASE, DLP, Secure Web Gateway, SSL/TLS, IPsec, Azure AD, SAML. Zero trust, zero compromises.</p>
       </div>
-    </section>
-
-    <section>
-      <h2>&gt; CAREER_DEPLOYMENT_LOG</h2>
-      <div class="log-container">
-        <div class="job-entry">
-          <div class="job-header">
-            <h3 style="color: #ffffff; font-size: 1.2rem; margin:0; letter-spacing: 1px;">Netskope</h3>
-            <span class="tag">Nov 2024 - Present</span>
-          </div>
-          <p class="job-title">Senior Cloud Support Engineer</p>
-          <p>Handling and solving high-severity security architecture logs for Enterprise Clients on Netskope cloud routing, NPA, Explicit Proxy implementations, and structural DLP policies.</p>
-        </div>
-
-        <div class="job-entry" style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 25px;">
-          <div class="job-header">
-            <h3 style="color: #ffffff; font-size: 1.2rem; margin:0; letter-spacing: 1px;">Citrix</h3>
-            <span class="tag" style="background-color:rgba(255,255,255,0.03); color:#9ca3af; border-color:rgba(255,255,255,0.1);">Mar 2024 - Nov 2024</span>
-          </div>
-          <p class="job-title">Citrix Cloud Support Engineer</p>
-          <p>Delivered critical tier support infrastructures for Citrix ADC (NetScaler networks), advanced Gateway access points, and virtualization matrixes. Resolved complex load balancing and SSL decryption incidents.</p>
-        </div>
-
-        <div class="job-entry" style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 25px;">
-          <div class="job-header">
-            <h3 style="color: #ffffff; font-size: 1.2rem; margin:0; letter-spacing: 1px;">Josh Software Pvt. Ltd.</h3>
-            <span class="tag" style="background-color:rgba(255,255,255,0.03); color:#9ca3af; border-color:rgba(255,255,255,0.1);">June 2022 - Oct 2023</span>
-          </div>
-          <p class="job-title">Cloud Software Engineer</p>
-          <p>Engineered backend application systems and cloud environments utilizing Java, Spring Boot paradigms, and AWS service pipelines. Executed complete data migrations between Azure environments and AWS architecture clusters.</p>
-        </div>
+      <div class="grid-item reveal delay-3">
+        <h3>Diagnostics</h3>
+        <p>Wireshark, TCP Dumps, Packet Analysis, Log Parsing | Java, REST APIs, Python, MySQL.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer style="text-align: center; font-size: 11px; color: #475569; padding-top: 10px; font-weight: bold; letter-spacing: 1px;">
-      SYSTEM_STATUS: ACTIVE // SYSTEM_NODES: OK // AUTH_USER: SAHIL_AMIN_
-    </footer>
-  </div>
+  <section id="experience">
+    <div class="reveal">
+      <h2>Selected <span class="red-text">Deployments.</span></h2>
+    </div>
+    
+    <div style="margin-top: 20px;">
+      <div class="reveal delay-1" style="margin-bottom: 60px;">
+        <h3 style="font-size: 2.5rem; margin: 0 0 10px 0; font-weight: 900;">Netskope <span style="font-size: 1.2rem; color: #ef4444; font-weight: 600; vertical-align: middle;">[ 2024 - Present ]</span></h3>
+        <p class="lead" style="font-size: 1.1rem; max-width: 100%;">Handling and solving high-severity security architecture logs for Enterprise Clients on Netskope cloud routing, NPA, Explicit Proxy implementations, and structural DLP policies.</p>
+      </div>
+
+      <div class="reveal delay-2" style="margin-bottom: 60px;">
+        <h3 style="font-size: 2.5rem; margin: 0 0 10px 0; font-weight: 900;">Citrix <span style="font-size: 1.2rem; color: #ef4444; font-weight: 600; vertical-align: middle;">[ Mar 2024 - Nov 2024 ]</span></h3>
+        <p class="lead" style="font-size: 1.1rem; max-width: 100%;">Delivered critical tier support infrastructures for Citrix ADC (NetScaler networks), advanced Gateway access points, and virtualization matrixes. Resolved complex load balancing and SSL decryption incidents.</p>
+      </div>
+
+      <div class="reveal delay-3">
+        <h3 style="font-size: 2.5rem; margin: 0 0 10px 0; font-weight: 900;">Josh Software <span style="font-size: 1.2rem; color: #ef4444; font-weight: 600; vertical-align: middle;">[ 2022 - 2023 ]</span></h3>
+        <p class="lead" style="font-size: 1.1rem; max-width: 100%;">Engineered backend application systems and cloud environments utilizing Java, Spring Boot paradigms, and AWS service pipelines.</p>
+      </div>
+    </div>
+  </section>
 
   <script>
-    // --- CANVAS DIGITAL STREAM ENGINE ---
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
+    document.addEventListener("DOMContentLoaded", () => {
+      // Intersection Observer triggers animations when elements enter the screen
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15 // Triggers when 15% of the element is visible
+      };
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            // Optional: Stop observing once revealed so it doesn't animate out
+            // observer.unobserve(entry.target); 
+          }
+        });
+      }, observerOptions);
 
-    const alphabet = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const rainDrops = Array(Math.floor(columns)).fill(1);
-
-    function draw() {
-      ctx.fillStyle = 'rgba(3, 3, 3, 0.06)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'rgba(16, 185, 129, 0.35)';
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < rainDrops.length; i++) {
-        const text = alphabet[Math.floor(Math.random() * alphabet.length)];
-        const x = i * fontSize;
-        const y = rainDrops[i] * fontSize;
-
-        if (Math.random() > 0.985) ctx.fillStyle = '#ffffff';
-        else ctx.fillStyle = 'rgba(16, 185, 129, 0.35)';
-
-        ctx.fillText(text, x, y);
-        if (y > canvas.height && Math.random() > 0.98) rainDrops[i] = 0;
-        rainDrops[i]++;
-      }
-    }
-    setInterval(draw, 33);
-
-    // --- CINEMATIC TRANSITION CONTROLLER ---
-    window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        const bootScreen = document.getElementById('boot-screen');
-        const mainContent = document.getElementById('main-content');
-        
-        bootScreen.style.opacity = '0';
-        bootScreen.style.transform = 'scale(1.05)';
-        
-        setTimeout(() => {
-          bootScreen.style.display = 'none';
-          mainContent.style.opacity = '1';
-          mainContent.style.transform = 'translateY(0)';
-        }, 600);
-      }, 1600); // Loader keeps active for 1.6s for visual boot simulation
+      // Select all elements with the 'reveal' class and observe them
+      document.querySelectorAll('.reveal').forEach((element) => {
+        observer.observe(element);
+      });
     });
   </script>
 </body>
