@@ -20,14 +20,13 @@ const MatrixBackground = () => {
 
     const fontSize = 14;
     const columns = canvas.width / fontSize;
-
     const rainDrops = Array.from({ length: Math.floor(columns) }).map(() => 1);
 
     const draw = () => {
-      ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
+      ctx.fillStyle = 'rgba(5, 5, 5, 0.06)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = 'rgba(16, 185, 129, 0.35)'; // Premium emerald glow matrix
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.4)';
       ctx.font = fontSize + 'px monospace';
 
       for (let i = 0; i < rainDrops.length; i++) {
@@ -35,7 +34,6 @@ const MatrixBackground = () => {
         const x = i * fontSize;
         const y = rainDrops[i] * fontSize;
 
-        // Highlight head of rain drop for standard terminal look
         if (Math.random() > 0.98) {
           ctx.fillStyle = '#ffffff';
         } else {
@@ -58,77 +56,163 @@ const MatrixBackground = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full -z-10 opacity-40 pointer-events-none" />;
+  return (
+    <canvas 
+      ref={canvasRef} 
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: -1,
+        opacity: 0.35,
+        pointerEvents: 'none'
+      }} 
+    />
+  );
 };
 
 export default function App() {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   return (
-    <div className="relative min-h-screen text-slate-200 selection:bg-emerald-500/30 selection:text-emerald-300 antialiased p-4 md:p-8">
-      {/* Cinematic Ambient Background */}
+    <div style={{
+      backgroundColor: '#050505',
+      color: '#e2e8f0',
+      fontFamily: 'monospace',
+      minHeight: '100vh',
+      position: 'relative',
+      margin: 0,
+      padding: isMobile ? '20px 12px' : '40px 20px',
+      overflowX: 'hidden',
+      boxSizing: 'border-box'
+    }}>
+      {/* Cinematic Matrix Rain */}
       <MatrixBackground />
 
-      <div className="max-w-4xl mx-auto space-y-10 relative z-10 my-6">
+      <div style={{
+        maxWidth: '850px',
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '40px',
+        position: 'relative',
+        zIndex: 1
+      }}>
         
-        {/* --- HERO HEADER SECTION --- */}
-        <header className="border border-emerald-500/30 bg-black/60 backdrop-blur-md p-6 md:p-8 rounded-xl shadow-2xl shadow-emerald-900/10 text-center relative overflow-hidden group">
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent animate-pulse" />
+        {/* --- PREMIUM HERO DASHBOARD --- */}
+        <header style={{
+          border: '1px solid rgba(16, 185, 129, 0.3)',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          backdropFilter: 'blur(8px)',
+          padding: isMobile ? '30px 20px' : '40px',
+          borderRadius: '16px',
+          boxShadow: '0 0 40px rgba(16, 185, 129, 0.1)',
+          textAlign: 'center',
+          position: 'relative'
+        }}>
+          {/* Glowing Top Line Accent */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '2px',
+            background: 'linear-gradient(to right, transparent, #10b981, transparent)'
+          }} />
           
           {/* PROFILE PICTURE FROM PUBLIC DIR */}
-          <div className="relative w-28 h-28 mx-auto mb-4">
-            <div className="absolute inset-0 rounded-full border border-emerald-500/40 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.3)]"></div>
+          <div style={{
+            position: 'relative',
+            width: '110px',
+            height: '110px',
+            margin: '0 auto 20px auto'
+          }}>
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              borderRadius: '50%',
+              border: '1px solid rgba(16, 185, 129, 0.5)',
+              boxShadow: '0 0 15px rgba(16, 185, 129, 0.3)'
+            }} />
             <img 
               src={`${import.meta.env.BASE_URL}cutout.png`} 
               alt="Sahil Amin" 
-              className="w-full h-full rounded-full object-cover relative z-10 bg-slate-900 border border-slate-800"
+              style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: '50%',
+                objectCover: 'cover',
+                position: 'relative',
+                zIndex: 2,
+                backgroundColor: '#0f172a',
+                border: '1px solid #1e293b'
+              }}
             />
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold tracking-wider text-emerald-400 mb-2 drop-shadow-[0_0_12px_rgba(52,211,153,0.3)]">
+          <h1 style={{ 
+            color: '#10b981', 
+            fontSize: isMobile ? '2.2rem' : '3.2rem', 
+            margin: '0 0 5px 0', 
+            fontWeight: 'bold',
+            letterSpacing: '1px',
+            textShadow: '0 0 10px rgba(16, 185, 129, 0.2)'
+          }}>
             SAHIL AMIN
           </h1>
-          <p className="text-xs md:text-sm font-semibold uppercase tracking-[0.25em] text-purple-400 mb-4">
+          <p style={{ 
+            color: '#c084fc', 
+            fontSize: '0.9rem', 
+            margin: '0 0 20px 0', 
+            textTransform: 'uppercase', 
+            letterSpacing: '4px',
+            fontWeight: '600'
+          }}>
             Senior Cloud Support Engineer
           </p>
-          <div className="w-16 h-[1px] bg-emerald-500/30 mx-auto mb-4" />
-          <p className="text-sm md:text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
+          <div style={{ width: '50px', height: '1px', backgroundColor: 'rgba(16, 185, 129, 0.3)', margin: '0 auto 20px auto' }} />
+          <p style={{ color: '#9ca3af', fontSize: isMobile ? '0.95rem' : '1.05rem', margin: '0', leadingHeight: '1.6', maxWidth: '650px', marginLeft: 'auto', marginRight: 'auto' }}>
             3 years of architecture experience engineering resilient cloud infrastructure, secure networking pipelines, data integrity, and high-availability enterprise frameworks.
           </p>
         </header>
 
-        {/* --- SYSTEM ARSENAL (SKILLS) --- */}
-        <section className="space-y-4">
-          <h2 className="text-lg font-bold uppercase tracking-widest text-emerald-400 flex items-center gap-2 pl-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+        {/* --- SYSTEM ARSENAL (SKILLS GRID) --- */}
+        <section style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          <h2 style={{ color: '#10b981', fontSize: '1.2rem', fontWeight: 'bold', trackingSpacing: '2px', textTransform: 'uppercase', margin: '0 0 5px 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10b981' }} />
             &gt; SYSTEM_ARSENAL
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Skill Node 1 */}
-            <div className="border border-slate-800 bg-black/50 backdrop-blur-md p-5 rounded-xl hover:border-emerald-500/40 transition-all duration-300 group">
-              <h3 className="text-emerald-300 font-bold mb-2 flex items-center gap-2 text-sm md:text-base">
-                <span className="text-purple-400">01//</span> Cloud & Infra
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr 1fr' : '1fr', 
+            gap: '16px' 
+          }}>
+            <div style={{ border: '1px solid #1e293b', backgroundColor: 'rgba(0,0,0,0.6)', padding: '20px', borderRadius: '12px' }}>
+              <h3 style={{ color: '#34d399', margin: '0 0 8px 0', fontSize: '1rem', fontWeight: 'bold' }}>
+                <span style={{ color: '#c084fc' }}>01//</span> Cloud & Infra
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: 0, lineHeight: '1.5' }}>
                 AWS VPC, EC2, S3, ELB, RDS, DynamoDB, Route53
               </p>
             </div>
 
-            {/* Skill Node 2 */}
-            <div className="border border-slate-800 bg-black/50 backdrop-blur-md p-5 rounded-xl hover:border-emerald-500/40 transition-all duration-300 group">
-              <h3 className="text-emerald-300 font-bold mb-2 flex items-center gap-2 text-sm md:text-base">
-                <span className="text-purple-400">02//</span> Security & Networks
+            <div style={{ border: '1px solid #1e293b', backgroundColor: 'rgba(0,0,0,0.6)', padding: '20px', borderRadius: '12px' }}>
+              <h3 style={{ color: '#34d399', margin: '0 0 8px 0', fontSize: '1rem', fontWeight: 'bold' }}>
+                <span style={{ color: '#c084fc' }}>02//</span> Security & Networks
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: 0, lineHeight: '1.5' }}>
                 Netskope SASE, DLP, Secure Web Gateway, SSL/TLS, IPsec, Azure AD, SAML, TCP/IP, DNS, DHCP, SSH, Load Balancing, Citrix Gateway
               </p>
             </div>
 
-            {/* Skill Node 3 */}
-            <div className="border border-slate-800 bg-black/50 backdrop-blur-md p-5 rounded-xl hover:border-emerald-500/40 transition-all duration-300 group">
-              <h3 className="text-emerald-300 font-bold mb-2 flex items-center gap-2 text-sm md:text-base">
-                <span className="text-purple-400">03//</span> Diagnostics
+            <div style={{ border: '1px solid #1e293b', backgroundColor: 'rgba(0,0,0,0.6)', padding: '20px', borderRadius: '12px' }}>
+              <h3 style={{ color: '#34d399', margin: '0 0 8px 0', fontSize: '1rem', fontWeight: 'bold' }}>
+                <span style={{ color: '#c084fc' }}>03//</span> Diagnostics
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: 0, lineHeight: '1.5' }}>
                 Wireshark, TCP Dumps, Packet Analysis, Log Parsing | Java, REST APIs, Python, MySQL
               </p>
             </div>
@@ -136,55 +220,59 @@ export default function App() {
         </section>
 
         {/* --- CAREER DEPLOYMENT LOG (TIMELINE) --- */}
-        <section className="space-y-4">
-          <h2 className="text-lg font-bold uppercase tracking-widest text-emerald-400 flex items-center gap-2 pl-2">
+        <section style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          <h2 style={{ color: '#10b981', fontSize: '1.2rem', fontWeight: 'bold', textTransform: 'uppercase', margin: '0' }}>
             &gt; CAREER_DEPLOYMENT_LOG
           </h2>
 
-          <div className="border border-slate-800 bg-black/40 backdrop-blur-md rounded-xl p-5 md:p-6 space-y-6 relative">
-            <div className="absolute left-6 top-8 bottom-8 w-[1px] bg-gradient-to-b from-emerald-500/40 via-slate-800 to-transparent hidden md:block" />
-
+          <div style={{ 
+            border: '1px solid #1e293b', 
+            backgroundColor: 'rgba(0,0,0,0.5)', 
+            borderRadius: '12px', 
+            padding: isMobile ? '20px' : '30px', 
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '30px'
+          }}>
+            
             {/* Job Entry 1 */}
-            <div className="relative md:pl-8 space-y-2">
-              <div className="absolute left-[19px] top-[6px] w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden md:block" />
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="text-lg font-bold text-emerald-300">Netskope</h3>
-                <span className="px-2 py-0.5 text-[10px] font-mono bg-emerald-950 text-emerald-400 border border-emerald-500/30 rounded">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ display: 'flex', justifyContent: 'between', flexWrap: 'wrap', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ color: '#34d399', margin: 0, fontSize: '1.15rem', fontWeight: 'bold' }}>Netskope</h3>
+                <span style={{ padding: '2px 8px', fontSize: '0.7rem', backgroundColor: 'rgba(16,185,129,0.15)', color: '#10b981', border: '1px solid rgba(16,185,129,0.3)', borderRadius: '4px', marginLeft: 'auto' }}>
                   Nov 2024 - Present
                 </span>
               </div>
-              <p className="text-xs font-semibold text-purple-400 uppercase tracking-wider">Senior Cloud Support Engineer</p>
-              <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
+              <p style={{ color: '#c084fc', margin: 0, fontSize: '0.85rem', fontWeight: '600', textTransform: 'uppercase' }}>Senior Cloud Support Engineer</p>
+              <p style={{ color: '#9ca3af', margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>
                 Handling and solving high-severity security architecture logs for Enterprise Clients on Netskope cloud routing, NPA, Explicit Proxy implementations, and structural DLP policies.
               </p>
             </div>
 
             {/* Job Entry 2 */}
-            <div className="relative md:pl-8 space-y-2">
-              <div className="absolute left-[19px] top-[6px] w-2 h-2 rounded-full bg-slate-700 hidden md:block" />
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="text-lg font-bold text-emerald-300">Citrix</h3>
-                <span className="px-2 py-0.5 text-[10px] font-mono bg-slate-900 text-slate-400 border border-slate-800 rounded">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'between', flexWrap: 'wrap', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ color: '#34d399', margin: 0, fontSize: '1.15rem', fontWeight: 'bold' }}>Citrix</h3>
+                <span style={{ padding: '2px 8px', fontSize: '0.7rem', backgroundColor: '#1e293b', color: '#9ca3af', borderRadius: '4px', marginLeft: 'auto' }}>
                   Mar 2024 - Nov 2024
                 </span>
               </div>
-              <p className="text-xs font-semibold text-purple-400 uppercase tracking-wider">Citrix Cloud Support Engineer</p>
-              <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
+              <p style={{ color: '#c084fc', margin: 0, fontSize: '0.85rem', fontWeight: '600', textTransform: 'uppercase' }}>Citrix Cloud Support Engineer</p>
+              <p style={{ color: '#9ca3af', margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>
                 Delivered critical tier support infrastructures for Citrix ADC (NetScaler networks), advanced Gateway access points, and virtualization matrixes. Resolved complex load balancing and SSL decryption incidents.
               </p>
             </div>
 
             {/* Job Entry 3 */}
-            <div className="relative md:pl-8 space-y-2">
-              <div className="absolute left-[19px] top-[6px] w-2 h-2 rounded-full bg-slate-700 hidden md:block" />
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="text-lg font-bold text-emerald-300">Josh Software Pvt. Ltd.</h3>
-                <span className="px-2 py-0.5 text-[10px] font-mono bg-slate-900 text-slate-400 border border-slate-800 rounded">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'between', flexWrap: 'wrap', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ color: '#34d399', margin: 0, fontSize: '1.15rem', fontWeight: 'bold' }}>Josh Software Pvt. Ltd.</h3>
+                <span style={{ padding: '2px 8px', fontSize: '0.7rem', backgroundColor: '#1e293b', color: '#9ca3af', borderRadius: '4px', marginLeft: 'auto' }}>
                   June 2022 - Oct 2023
                 </span>
               </div>
-              <p className="text-xs font-semibold text-purple-400 uppercase tracking-wider">Cloud Software Engineer</p>
-              <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
+              <p style={{ color: '#c084fc', margin: 0, fontSize: '0.85rem', fontWeight: '600', textTransform: 'uppercase' }}>Cloud Software Engineer</p>
+              <p style={{ color: '#9ca3af', margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>
                 Engineered backend application systems and cloud environments utilizing Java, Spring Boot paradigms, and AWS service pipelines. Executed complete data migrations between Azure environments and AWS architecture clusters.
               </p>
             </div>
@@ -193,7 +281,7 @@ export default function App() {
         </section>
 
         {/* --- FOOTER CONSOLE --- */}
-        <footer className="text-center text-[11px] font-mono text-slate-600 pt-4">
+        <footer style={{ textAlign: 'center', fontSize: '11px', color: '#475569', paddingTop: '10px' }}>
           SYSTEM_STATUS: ONLINE // AUTH_USER: SAHIL_AMIN_
         </footer>
       </div>
