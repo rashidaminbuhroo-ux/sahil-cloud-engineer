@@ -1,10 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// System Reset Configuration
 export default defineConfig({
   plugins: [react()],
-  base: '/sahil-cloud-engineer/',
-  build: {
-    outDir: '.', // Forces Vite to build files right into the main directory
-  }
+  base: './', // Using relative paths forces the browser to find files wherever they are
 })
